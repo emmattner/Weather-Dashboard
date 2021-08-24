@@ -77,3 +77,15 @@ const cityUVIndex = function (lon, lat, city) {
     });
 };
 
+const displayCityWeather = function (city, searchTerm) {
+    cityContainer.textContent = '';
+    citySearchTerm.textContent = searchTerm
+
+    const displayCurrentDate = document.querySelector('#current-city-date')
+    const todayDate = dayjs();
+    displayCurrentDate.textContent = todayDate.format('dddd, MMMM D, YYYY, h:mmA');
+
+    const displayTemperature = document.querySelector('#main-temp')
+    const todayTemp = Math.round(city.main.temp) + " °C";
+    displayTemperature.textContent = todayTemp;
+}
