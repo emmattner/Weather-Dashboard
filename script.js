@@ -109,3 +109,17 @@ const displayCityWeather = function (city, searchTerm) {
     searchCityUV(lon, lat, city);
 
 };
+
+const displayUVIndex = function(data) {
+    const UV = data.value;
+    if (uv >= 6) {
+        currentUVIndex.classList="badge badge-danger"
+        currentUVIndex.innerHTML=" " + UV + " ";
+    } else if (UV > 3) {
+        currentUVIndex.classList="badge badge-warning"
+        currentUVIndex.innerHTML=" " + UV + " ";
+    } else {
+        currentUVIndex.classList="badge badge-success"
+        currentUVIndex.innerHTML=" " + UV + " ";
+    }
+}
