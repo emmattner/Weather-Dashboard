@@ -37,3 +37,23 @@ const buttonClickHandler = function (event) {
     getForcast(prevCityClick);
 };
 
+const getCityWeather = function (city) {
+
+    const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + API_KEY;
+
+    fetch(apiUrl)
+        .then(function (response) {
+            if (response.ok) {
+                console.log(response);
+                response.json().then(function(data) {
+                    console.log(data);
+                    displayCityWeather(data, city);
+                });
+            } else {
+                alert('Error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            alert('Unable to connect to OpenWeather');
+        });
+};
