@@ -18,7 +18,7 @@ const formSubmitHandler = function (event) {
 
     if (city) {
         getCityWeather(city);
-        getForcast(city);
+        getForecast(city);
 
         cityArray.push(city);
         localStorage.setItem('city', JSON.stringify(cityArray));
@@ -34,7 +34,7 @@ const buttonClickHandler = function (event) {
     const prevCityClick = event.currentTarget.textContext;
 
     getCityWeather(prevCityClick);
-    getForcast(prevCityClick);
+    getForecast(prevCityClick);
 };
 
 const getCityWeather = function (city) {
@@ -123,3 +123,20 @@ const displayUVIndex = function(data) {
         currentUVIndex.innerHTML=" " + UV + " ";
     }
 }
+
+const getForecast = function(city) {
+    const forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + API_KEY;
+
+    fetch(forecastURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                displayForecast(data.list);
+            });
+        } else {
+            alert("Error:" + response.statusText);
+        }
+    })
+    .catch(function(error) {
+        alert("Unable to connect to OpenWeather");
+    })
+};
