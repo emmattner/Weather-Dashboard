@@ -57,3 +57,23 @@ const getCityWeather = function (city) {
             alert('Unable to connect to OpenWeather');
         });
 };
+
+const cityUVIndex = function (lon, lat, city) {
+    const UvUrl ="https://api.openweathermap.org/data/2.5/uvi?q=" + city + "&appid=" + key + "&lat=" + lat + "&lon=" + lon; 
+
+    fetch(UvUrl)
+    .then(function (response) {
+        if (response.ok) {
+            response.json().then(function(lon, lat, city) {
+                console.log(data);
+                displayUVIndex(lon, lat, city);
+            });
+        } else {
+            alert('Error: ' + response.statusText);
+        }
+    })
+    .catch(function (error) {
+        alert('Unable to connect to OpenWeather');
+    });
+};
+
