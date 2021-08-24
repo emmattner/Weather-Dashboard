@@ -85,7 +85,27 @@ const displayCityWeather = function (city, searchTerm) {
     const todayDate = dayjs();
     displayCurrentDate.textContent = todayDate.format('dddd, MMMM D, YYYY, h:mmA');
 
-    const displayTemperature = document.querySelector('#main-temp')
+    const displayCurrentTemperature = document.querySelector('#main-temp')
     const todayTemp = Math.round(city.main.temp) + " °C";
-    displayTemperature.textContent = todayTemp;
-}
+    displayCurrentTemperature.textContent = todayTemp;
+
+    const displayWindSpeed = document.querySelector('#wind-speed')
+    const todayWindSpeed = city.wind.speed + " MPH"
+    displayWindSpeed.textContent = todayWindSpeed;
+
+    const displayCurrentHumidity = document.querySelector('#current-humidity')
+    const todayHumidity = city.main.humidity + " %"
+    displayCurrentHumidity.textContent = todayHumidity;
+
+    const newCity = document.createElement('li');
+    newCity.className = "list-group-item";
+    newCity.textContent = searchTerm;
+    newCity.addEventListener("click", buttonClickHandler);
+    prevCity.appendChild(newCity);
+
+    const lon = city.coord.lon;
+    const lat = city.coord.lat;
+
+    searchCityUV(lon, lat, city);
+
+};
