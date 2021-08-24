@@ -28,3 +28,12 @@ const formSubmitHandler = function (event) {
         alert('Please enter a City name');
     }
 };
+
+const buttonClickHandler = function (event) {
+
+    const prevCityClick = event.currentTarget.textContext;
+
+    getCityWeather(prevCityClick);
+    getForcast(prevCityClick);
+};
+
