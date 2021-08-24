@@ -140,3 +140,31 @@ const getForecast = function(city) {
         alert("Unable to connect to OpenWeather");
     })
 };
+
+const displayForecast = function(list) {
+    for (const i = 0; i <= 4; i++) {
+
+        const displayDateOne = document.querySelector('#date-0');
+        const forecastDateOne = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        displayDateOne.textContent = forecastDateOne;
+
+        const displayDateTwo = document.querySelector('#date-0');
+        const forecastDateTwo = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        displayDateTwo.textContent = forecastDateTwo;
+
+        const displayDateThree = document.querySelector('#date-0');
+        const forecastDateThree = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        displayDateThree.textContent = forecastDateThree;
+
+        const displayDateFour = document.querySelector('#date-0');
+        const forecastDateFour = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        displayDateFour.textContent = forecastDateFour;
+
+        const displayDateFive = document.querySelector('#date-0');
+        const forecastDateFive = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        displayDateFive.textContent = forecastDateFive;
+
+        const displayCurrentTemperature = document.querySelector(`#temp-${i}`);
+        const forecastTemp = list[i].main.temp + "°C"
+    }  
+}
