@@ -3,9 +3,9 @@ const cityInputEl = document.querySelector('#city-input');
 const cityContainer = document.querySelector('#city-container');
 const citySearchTerm = document.querySelector('#city-search-term');
 const currentWeather = document.querySelector('#current-weather');
-const prevCity = document.querySelector('#previous-city');
 const fiveDayForecast = document.querySelector('#forecast-cards');
-const currentUVIndex = document.querySelector('#UV-index');
+const prevCity = document.querySelector('#previous-city');
+const currentUVIndex = document.querySelector('#uv-index');
 
 const API_KEY = '4a3134ff84b520e99655fd55fab2c3b8';
 
@@ -59,7 +59,7 @@ const getCityWeather = function (city) {
 };
 
 const cityUVIndex = function (lon, lat, city) {
-    const UvUrl ="https://api.openweathermap.org/data/2.5/uvi?q=" + city + "&appid=" + key + "&lat=" + lat + "&lon=" + lon; 
+    const UvUrl ="https://api.openweathermap.org/data/2.5/uvi?q=" + city + "&appid=" + API_KEY + "&lat=" + lat + "&lon=" + lon; 
 
     fetch(UvUrl)
     .then(function (response) {
@@ -112,7 +112,7 @@ const displayCityWeather = function (city, searchTerm) {
 
 const displayUVIndex = function(data) {
     const UV = data.value;
-    if (uv >= 6) {
+    if (UV >= 6) {
         currentUVIndex.classList="badge badge-danger"
         currentUVIndex.innerHTML=" " + UV + " ";
     } else if (UV > 3) {
@@ -145,26 +145,34 @@ const displayForecast = function(list) {
     for (const i = 0; i <= 4; i++) {
 
         const displayDateOne = document.querySelector('#date-0');
-        const forecastDateOne = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        const forecastDateOne = dayjs().add(1, "days").format('dddd, MMMM D, YYYY');
         displayDateOne.textContent = forecastDateOne;
 
-        const displayDateTwo = document.querySelector('#date-0');
-        const forecastDateTwo = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        const displayDateTwo = document.querySelector('#date-1');
+        const forecastDateTwo = dayjs().add(2, "days").format('dddd, MMMM D, YYYY');
         displayDateTwo.textContent = forecastDateTwo;
 
-        const displayDateThree = document.querySelector('#date-0');
-        const forecastDateThree = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        const displayDateThree = document.querySelector('#date-2');
+        const forecastDateThree = dayjs().add(3, "days").format('dddd, MMMM D, YYYY');
         displayDateThree.textContent = forecastDateThree;
 
-        const displayDateFour = document.querySelector('#date-0');
-        const forecastDateFour = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        const displayDateFour = document.querySelector('#date-3');
+        const forecastDateFour = dayjs().add(4, "days").format('dddd, MMMM D, YYYY');
         displayDateFour.textContent = forecastDateFour;
 
-        const displayDateFive = document.querySelector('#date-0');
-        const forecastDateFive = dayjs().add(1, "days").format('dddd, MMMM D, YYYY, h:mmA');
+        const displayDateFive = document.querySelector('#date-4');
+        const forecastDateFive = dayjs().add(5, "days").format('dddd, MMMM D, YYYY');
         displayDateFive.textContent = forecastDateFive;
 
         const displayCurrentTemperature = document.querySelector(`#temp-${i}`);
-        const forecastTemp = list[i].main.temp + "°C"
+        const forecastTemp = list[i].main.temp + "°C";
+        displayCurrentTemperature.textContent = forecastTemp;
+
+        const displayCurrentHumidity = document.querySelector(`#humidity-${i}`);
+        const forecastHumidity = list[i].main.humidity + "%";
+        displayCurrentHumidity.textContent = forecastHumidity;
+        
     }  
-}
+};
+
+userFormEl.addEventListener("submit", formSubmitHandler);
